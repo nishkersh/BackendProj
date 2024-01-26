@@ -43,6 +43,7 @@ const app =express()
 // we will use another way of importing .env in madular way
 
 import connectDB from "./db/dbConnect.js";
+import { app } from "./app.js";
 // import express  from "express";
 import dotenv from "dotenv";
 
@@ -51,3 +52,11 @@ dotenv.config({
 })
 
 connectDB()
+.then(()=>{
+    app.listen(proceess.env.PORT || 8000 , ()=>{
+        console.log(`Server is running at port : ${proceess.env.PORT}`);
+    })
+})
+.catch((err)=>{
+    console.log("MongoDB connection failed",err)
+})
